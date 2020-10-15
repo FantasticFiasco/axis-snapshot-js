@@ -1,5 +1,5 @@
-import * as http from 'http';
-import * as https from 'https';
+import { Agent as HttpAgent } from 'http';
+import { Agent as HttpsAgent } from 'https';
 import { Protocol } from './Protocol';
 
 /**
@@ -9,7 +9,7 @@ export interface Options {
   /**
    * The HTTP or HTTPS agent used when opening the connection.
    */
-  agent?: http.Agent | https.Agent;
+  agent?: HttpAgent | HttpsAgent;
 }
 
 /**
