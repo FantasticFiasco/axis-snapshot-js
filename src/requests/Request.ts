@@ -1,4 +1,4 @@
-import got, { OptionsOfTextResponseBody, RequestError as GotRequestError } from 'got';
+import got, { OptionsOfBufferResponseBody, RequestError as GotRequestError } from 'got';
 import { Agent as HttpAgent } from 'http';
 import { Agent as HttpsAgent } from 'https';
 import { Connection } from '../Connection';
@@ -7,8 +7,9 @@ import { RequestError, UnauthorizationError } from '../errors';
 export abstract class Request {
   protected constructor(protected readonly connection: Connection) {}
 
-  protected async get(url: string): Promise<string> {
-    const options: OptionsOfTextResponseBody = {
+  protected async get(url: string): Promise<Buffer> {
+    const options: OptionsOfBufferResponseBody = {
+      responseType: 'buffer',
       username: this.connection.username,
       password: this.connection.password,
     };
