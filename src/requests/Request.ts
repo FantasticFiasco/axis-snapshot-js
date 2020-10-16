@@ -6,7 +6,7 @@ import { RequestError, UnauthorizationError } from '../errors';
 export abstract class Request {
     protected constructor(protected readonly connection: Connection) {}
 
-    protected async get(url: string): Promise<string> {
+    protected async get(url: string): Promise<Buffer> {
         const options: rp.RequestPromiseOptions = {
             auth: {
                 user: this.connection.username,
@@ -14,6 +14,7 @@ export abstract class Request {
                 sendImmediately: false,
             },
             agent: this.connection.options?.agent,
+            encoding: null,
         };
 
         try {

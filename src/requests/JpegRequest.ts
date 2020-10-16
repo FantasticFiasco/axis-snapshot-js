@@ -6,7 +6,7 @@ export class JpegRequest extends Request {
         super(connection);
     }
 
-    public async send(): Promise<string> {
+    public async send(): Promise<Buffer> {
         const response = await this.get(this.url);
 
         return response;
