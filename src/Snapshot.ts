@@ -1,14 +1,14 @@
 import { Connection } from './Connection';
 import { JpegRequest } from './requests/JpegRequest';
 
-export class Images {
+export class Snapshot {
   /**
    * Initializes a new instance of the class.
    * @param connection The connection to the device.
    */
   constructor(private readonly connection: Connection) {}
 
-  public async get(): Promise<Buffer> {
+  public async get(): Promise<string> {
     const request = new JpegRequest(this.connection);
     const response = await request.send();
 
