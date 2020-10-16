@@ -2,7 +2,7 @@ import { Connection } from './Connection';
 import { JpegRequest } from './requests/JpegRequest';
 
 /**
- * Class responsible for getting snapshots from cameras.
+ * Class responsible for getting snapshots from a camera.
  */
 export class Snapshot {
     /**

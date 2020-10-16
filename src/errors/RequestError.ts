@@ -1,4 +1,4 @@
-import * as http from 'http';
+import { IncomingMessage } from 'http';
 
 /**
  * Error thrown when a request fail.
@@ -24,7 +24,7 @@ export class RequestError extends Error {
         /**
          * The response.
          */
-        readonly response: http.IncomingMessage
+        readonly response: IncomingMessage
     ) {
         super(message);
     }
