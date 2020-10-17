@@ -132,7 +132,7 @@ export interface SnapshotOptions {
      * {link https://www.axis.com/vapix-library/subjects/t10037719/section/t10051895/display?section=t10051895-t10051895-t10051056|VAPIX documentation}
      * for more information
      */
-    palette: string;
+    palette?: string;
     /**
      * Enable/disable (1, 0) square pixel (aspect ratio) correction. If the parameter is set to 1
      * the Axis product will adjusts the aspect ratio to make it appear as intended.

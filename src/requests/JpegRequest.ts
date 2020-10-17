@@ -1,5 +1,6 @@
 import { Connection } from '../Connection';
 import { SnapshotOptions } from '../SnapshotOptions';
+import { toQueryString } from './convert';
 import { Request } from './Request';
 
 export class JpegRequest extends Request {
@@ -16,28 +17,11 @@ export class JpegRequest extends Request {
     public get url(): string {
         let url = `${this.connection.url}/axis-cgi/jpg/image.cgi`;
 
-        const query = this.buildQuery();
-        if (query !== null) {
-            url += `?${query}`;
+        const queryString = toQueryString(this.options);
+        if (queryString !== null) {
+            url += '?' + queryString;
         }
 
         return url;
-    }
-
-    private buildQuery(): string | null {
-        if (!this.options) {
-            return null;
-        }
-
-        const queryParameters: string[] = [];
-        for (const [key, value] of Object.entries(this.options)) {
-            queryParameters.push(`${key}=${value}`);
-        }
-
-        if (queryParameters.length === 0) {
-            return null;
-        }
-
-        return queryParameters.join('&');
     }
 }
