@@ -1,3 +1,7 @@
+/**
+ * Snapshot options overriding the video stream configuration. Not specifying any options will
+ * get you the characteristics of the video stream.
+ */
 export interface SnapshotOptions {
     /**
      * Resolution of the returned image. For supported resolutions, check in parameter
