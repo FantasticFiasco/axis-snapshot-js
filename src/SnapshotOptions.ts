@@ -134,7 +134,7 @@ export interface SnapshotOptions {
      * The color palette to use in thermal cameras. Applicable if
      * Properties.Image.Palette.StreamPalette=yes or does not exist. See the
      * {link https://www.axis.com/vapix-library/subjects/t10037719/section/t10051895/display?section=t10051895-t10051895-t10051056|VAPIX documentation}
-     * for more information
+     * for more information.
      */
     palette?: string;
     /**
