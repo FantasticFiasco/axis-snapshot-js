@@ -1,8 +1,10 @@
 import { Connection } from '../Connection';
+import { SnapshotOptions } from '../SnapshotOptions';
+import { toQueryString } from './convert';
 import { Request } from './Request';
 
 export class JpegRequest extends Request {
-    constructor(connection: Connection) {
+    constructor(connection: Connection, private readonly options?: SnapshotOptions) {
         super(connection);
     }
 
@@ -13,6 +15,13 @@ export class JpegRequest extends Request {
     }
 
     public get url(): string {
-        return `${this.connection.url}/axis-cgi/jpg/image.cgi`;
+        let url = `${this.connection.url}/axis-cgi/jpg/image.cgi`;
+
+        const queryString = toQueryString(this.options);
+        if (queryString !== null) {
+            url += '?' + queryString;
+        }
+
+        return url;
     }
 }

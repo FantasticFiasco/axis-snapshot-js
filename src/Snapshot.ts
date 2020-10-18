@@ -1,5 +1,6 @@
 import { Connection } from './Connection';
 import { JpegRequest } from './requests/JpegRequest';
+import { SnapshotOptions } from './SnapshotOptions';
 
 /**
  * Class responsible for getting snapshots from a camera.
@@ -16,8 +17,8 @@ export class Snapshot {
      * @throws {UnauthorizedError} User is not authorized to perform operation.
      * @throws {RequestError} Request failed.
      */
-    public async jpeg(): Promise<Buffer> {
-        const request = new JpegRequest(this.connection);
+    public async jpeg(options?: SnapshotOptions): Promise<Buffer> {
+        const request = new JpegRequest(this.connection, options);
         const response = await request.send();
 
         return response;
