@@ -1,6 +1,10 @@
+import * as expect from '@fantasticfiasco/expect';
 import { SnapshotOptions } from '../SnapshotOptions';
 
 export function toQueryString(options?: SnapshotOptions): string | null {
+    expect.toBeTrue(options?.resolution === undefined || options.resolution.length > 0);
+    expect.toBeTrue(options?.palette === undefined || options.palette.length > 0);
+
     if (options === undefined) {
         return null;
     }

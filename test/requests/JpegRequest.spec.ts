@@ -14,17 +14,34 @@ describe('get parameters request', () => {
         });
 
         test('should return URL with empty options', () => {
-            // Act
+            // Arrange
             const options: SnapshotOptions = {};
+
+            // Act
             const request = new JpegRequest(connection, options);
 
             // Assert
             expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi`);
         });
 
+        test('should return URL with falsy JavaScript values', () => {
+            // Arrange
+            const options: SnapshotOptions = {
+                compression: 0,
+                rotation: 0,
+                squarepixel: 0,
+            };
+
+            // Act
+            const request = new JpegRequest(connection, options);
+
+            // Assert
+            expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?compression=0&rotation=0&squarepixel=0`);
+        });
+
         test('should return URL with single option', () => {
             // Arrange
-            const permutations: { options: SnapshotOptions; expectedQueryString: string }[] = [
+            const testCases: { options: SnapshotOptions; expectedQueryString: string }[] = [
                 { options: { resolution: '320x240' }, expectedQueryString: 'resolution=320x240' },
                 { options: { camera: 1 }, expectedQueryString: 'camera=1' },
                 { options: { camera: 'quad' }, expectedQueryString: 'camera=quad' },
@@ -34,18 +51,18 @@ describe('get parameters request', () => {
                 { options: { squarepixel: 1 }, expectedQueryString: 'squarepixel=1' },
             ];
 
-            for (const permutation of permutations) {
+            for (const testCase of testCases) {
                 // Act
-                const request = new JpegRequest(connection, permutation.options);
+                const request = new JpegRequest(connection, testCase.options);
 
                 // Assert
-                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${permutation.expectedQueryString}`);
+                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${testCase.expectedQueryString}`);
             }
         });
 
         test('should return URL with multiple options', () => {
             // Arrange
-            const permutations: { options: SnapshotOptions; expectedQueryString: string }[] = [
+            const testCases: { options: SnapshotOptions; expectedQueryString: string }[] = [
                 { options: { resolution: '320x240', camera: 1 }, expectedQueryString: 'resolution=320x240&camera=1' },
                 { options: { camera: 1, compression: 50 }, expectedQueryString: 'camera=1&compression=50' },
                 { options: { compression: 50, rotation: 180 }, expectedQueryString: 'compression=50&rotation=180' },
@@ -53,13 +70,39 @@ describe('get parameters request', () => {
                 { options: { palette: 'Axis', squarepixel: 1 }, expectedQueryString: 'palette=Axis&squarepixel=1' },
             ];
 
-            for (const permutation of permutations) {
+            for (const testCase of testCases) {
                 // Act
-                const request = new JpegRequest(connection, permutation.options);
+                const request = new JpegRequest(connection, testCase.options);
 
                 // Assert
-                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${permutation.expectedQueryString}`);
+                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${testCase.expectedQueryString}`);
             }
+        });
+
+        test('should throw error when resolution option is an empty string', () => {
+            // Arrange
+            const options: SnapshotOptions = {
+                resolution: '',
+            };
+
+            // Act
+            const request = new JpegRequest(connection, options);
+
+            // Assert
+            expect(() => request.url).toThrow();
+        });
+
+        test('should throw error when palette option is an empty string', () => {
+            // Arrange
+            const options: SnapshotOptions = {
+                palette: '',
+            };
+
+            // Act
+            const request = new JpegRequest(connection, options);
+
+            // Assert
+            expect(() => request.url).toThrow();
         });
     });
 });
