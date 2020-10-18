@@ -1,14 +1,15 @@
 {
   "name": "axis-snapshot",
   "version": "0.1.0",
-  "description": "TODO",
+  "description": "A Node.js library written in TypeScript capable of getting snapshots from Axis Communication cameras.",
   "keywords": [
     "axis",
     "communications",
     "camera",
     "device",
-    "image",
     "snapshot",
+    "jpeg",
+    "bmp",
     "vapix"
   ],
   "homepage": "https://github.com/FantasticFiasco/axis-snapshot-js",
