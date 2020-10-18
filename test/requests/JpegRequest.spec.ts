@@ -51,12 +51,12 @@ describe('get parameters request', () => {
                 { options: { squarepixel: 1 }, expectedQueryString: 'squarepixel=1' },
             ];
 
-            for (const testCase of testCases) {
+            for (const { options, expectedQueryString } of testCases) {
                 // Act
-                const request = new JpegRequest(connection, testCase.options);
+                const request = new JpegRequest(connection, options);
 
                 // Assert
-                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${testCase.expectedQueryString}`);
+                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${expectedQueryString}`);
             }
         });
 
@@ -70,12 +70,12 @@ describe('get parameters request', () => {
                 { options: { palette: 'Axis', squarepixel: 1 }, expectedQueryString: 'palette=Axis&squarepixel=1' },
             ];
 
-            for (const testCase of testCases) {
+            for (const { options, expectedQueryString } of testCases) {
                 // Act
-                const request = new JpegRequest(connection, testCase.options);
+                const request = new JpegRequest(connection, options);
 
                 // Assert
-                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${testCase.expectedQueryString}`);
+                expect(request.url).toBe(`${connection.url}/axis-cgi/jpg/image.cgi?${expectedQueryString}`);
             }
         });
 
