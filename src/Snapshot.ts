@@ -1,4 +1,5 @@
 import { Connection } from './Connection';
+import { BmpRequest } from './requests/BmpRequest';
 import { JpegRequest } from './requests/JpegRequest';
 import { SnapshotOptions } from './SnapshotOptions';
 
@@ -13,7 +14,19 @@ export class Snapshot {
     constructor(private readonly connection: Connection) {}
 
     /**
-     * Takes a JPEG snapshot from the camera.
+     * Takes a {link https://wikipedia.org/wiki/BMP_file_format|BMP} snapshot from the camera.
+     * @throws {UnauthorizedError} User is not authorized to perform operation.
+     * @throws {RequestError} Request failed.
+     */
+    public async bmp(options?: SnapshotOptions): Promise<Buffer> {
+        const request = new BmpRequest(this.connection, options);
+        const response = await request.send();
+
+        return response;
+    }
+
+    /**
+     * Takes a {link https://en.wikipedia.org/wiki/JPEG|JPEG} snapshot from the camera.
      * @throws {UnauthorizedError} User is not authorized to perform operation.
      * @throws {RequestError} Request failed.
      */
